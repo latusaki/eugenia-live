@@ -15,14 +15,14 @@ class Drawing extends Spine.Model
   select: (element) ->
     if element
       @selection.push(element)
-      @save()
+      # @save()
       @trigger("selectionChanged")
     
   clearSelection: ->
     @selection = []
-    @save()
+    # @save()
     @trigger("selectionChanged")
-  
+
   validate: ->
     "Name is required" unless @name
     
@@ -40,7 +40,7 @@ class Drawing extends Spine.Model
   updateCanvas: ->
     if paper.project
       paper.project.activeLayer.selected = false
-      for element in @selection
+      for element in @selection?
         element.select(paper.project.activeLayer)
     
 

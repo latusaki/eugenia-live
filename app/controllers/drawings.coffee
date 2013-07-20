@@ -17,12 +17,14 @@ class Index extends Spine.Controller
   constructor: ->
     super
     @active @render
+    Drawing.bind("fetch",@render) 
+
   
-  render: ->
+  render: =>
     context =
       drawings: Drawing.all()
       palette_specs: PaletteSpecification.all()
-    @log(context)
+    # @log(context)
     @html require('views/drawings/index')(context)
     
   create: (event) =>
