@@ -1,0 +1,18 @@
+<% unless $.isEmptyObject(@propertyValues): %>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Property</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for property,value of @propertyValues: %>
+      <tr>
+        <td style="vertical-align:middle"><%=property%></td>
+        <td><input type="text" data-property="<%=property%>" value="<%=value%>" style="margin-bottom: 0"></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
