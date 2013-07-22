@@ -3,7 +3,9 @@ rtc = require("models/rtc")
 Spine.Model.Realtime =
   extended:->
     @bind('save',rtc.saveJSON)
+    # @bind('create',rtc.createJSON)
     @bind('destroy',rtc.deleteJSON)
+
     Spine.Model.bind('Model:fileLoad',(map) =>
       @loadModelMap(map))
 
@@ -20,13 +22,14 @@ Spine.Model.Realtime =
     if records
       JSONstring = records.values().toString()
     JSONrecord = "[" + JSONstring + "]"
-    localStorage[@className] = JSONrecord
     @refresh(JSONrecord or [], clear: true)
     @fetch()
 
   modelMapUpdate: (event) ->
     @unbind('save',rtc.saveJSON) # we dont want events to fire again on changes.
     @unbind('destroy',rtc.deleteJSON)
+    # @unbind('create',rtc.createJSON)
+    console.log('modelMapUpdate')
     eventSource = event.property
     changeOnThisModel = eventSource.lastIndexOf(@className, 0) == 0
     if(changeOnThisModel)
@@ -35,17 +38,24 @@ Spine.Model.Realtime =
       if(recordNew)
         if(@exists(recordNew.id))
           recordLocal = @find(recordNew.id)
+          localSel = recordLocal.attributes().selection
+          recordNew.updateAttribute('selection', localSel) if localSel?
           recordLocal.updateAttributes(recordNew.attributes())
-          # console.log('exists - update '+ recordLocal?)
         else
           console.log('create')
+          console.log(recordNew.attributes())
           @create(recordNew.attributes())
       else
         recordLocal = @find(recordOld.id)
         console.log('null delete '+recordLocal?)
         recordLocal.destroy()
+   
     @bind('save',rtc.saveJSON)
+    # @bind('create',rtc.createJSON)
     @bind('destroy',rtc.deleteJSON)
+
+ 
+    
 
 
 
