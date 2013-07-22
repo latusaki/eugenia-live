@@ -42,6 +42,5 @@ class Drawing extends Spine.Model
       paper.project.activeLayer.selected = false
       for element in @selection?
         element.select(paper.project.activeLayer)
-    
 
 module.exports = Drawing
