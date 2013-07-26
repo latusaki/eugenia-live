@@ -19,7 +19,6 @@ class LinkTool extends Tool
 
   onMouseDrag: (event) ->
     current = new Date().getTime()
-    console.log(current-@timer >90)
     if(current - @timer > 90)
       @timer = current
       if @drafting

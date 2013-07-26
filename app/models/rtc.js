@@ -104,9 +104,9 @@
          records.set(this.className+evt.id,JSON.stringify(evt));
        } else {
          var records = realtimeDoc.getModel().createMap();
-         records.set(this.className+evt.id,JSON.stringify(evt));
-         records.addEventListener(gapi.drive.realtime.EventType.VALUE_CHANGED, remoteJSONUpdate); //repetitive, maybe find better way
          modelsMap.set(this.className,records);
+         records.set(this.className+evt.id,JSON.stringify(evt));
+         records.addEventListener(gapi.drive.realtime.EventType.VALUE_CHANGED, remoteJSONUpdate);
        }
     };
 
@@ -120,10 +120,10 @@
           var records = modelsMap.get(this.className);
           records.set(this.className+evt.id,JSON.stringify(evt));
         } else {
-          alert("UPDATEJSON - ELSE")
+          alert("********UPDATEJSON - ELSE********")
           var records = realtimeDoc.getModel().createMap();
           records.set(this.className+evt.id,JSON.stringify(evt));
-          records.addEventListener(gapi.drive.realtime.EventType.VALUE_CHANGED, remoteJSONUpdate); //repetitive, maybe find better way
+          records.addEventListener(gapi.drive.realtime.EventType.VALUE_CHANGED, remoteJSONUpdate); 
           modelsMap.set(this.className,records);
         }
       };
@@ -135,14 +135,12 @@
         var modelsMap = realtimeDoc.getModel().getRoot().get('modelsMap');
         var records = modelsMap.get(evt.property);
         records.addEventListener(gapi.drive.realtime.EventType.VALUE_CHANGED, remoteJSONUpdate);
-        Spine.Model.trigger('Model:fileLoad',modelsMap);
       }
     };
 
     var remoteJSONUpdate = function(evt){
       var isLocal = evt.isLocal;
       if(!isLocal){
-        var modelsMap = realtimeDoc.getModel().getRoot().get('modelsMap');
         Spine.Model.trigger('Model:fileUpdate',evt);
       }
     };
