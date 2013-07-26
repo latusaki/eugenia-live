@@ -3,6 +3,7 @@ CreateNode = require('models/commands/create_node')
 
 class NodeTool extends Tool
   parameters: {'shape' : null}
+  timer:0
   
   onMouseDown: (event) ->
     if @parameters.shape
@@ -11,8 +12,9 @@ class NodeTool extends Tool
       @clearSelection()
       
   onMouseMove: (event) ->
-    if @parameters.shape
-      @clearSelection()
-      @select(@hitTester.nodeAt(event.point))
+
+    # if @parameters.shape
+    #   @clearSelection()
+    #   @select(@hitTester.nodeAt(event.point))
   
 module.exports = NodeTool
