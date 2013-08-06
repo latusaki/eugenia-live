@@ -16,5 +16,6 @@ class NodeTool extends Tool
     # if @parameters.shape
     #   @clearSelection()
     #   @select(@hitTester.nodeAt(event.point))
+    #τεστινγ ψομιτ
   
 module.exports = NodeTool
