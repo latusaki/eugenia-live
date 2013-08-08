@@ -21,7 +21,7 @@ class Define extends Spine.Controller
       eugenia: new EugeniaNotation
     @notation = 'json'
     @active @change
-  
+
   currentNotation: =>
     @notations[@notation]
   
@@ -125,7 +125,7 @@ class Create extends Define
   
   node: =>
     new NodeShape(name: "TheNode", elements: [{}], palette_id: @palette.id)
-    
+
   link: =>
     new LinkShape(name: "TheLink", palette_id: @palette.id)
 

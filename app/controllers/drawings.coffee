@@ -7,6 +7,9 @@ CanvasRenderer = require('views/drawings/canvas_renderer')
 Toolbox = require('controllers/toolbox')
 Selection = require('controllers/selection')
 Commander = require ('models/commands/commander')
+Palette = require('models/palette')
+NodeShape = require('models/node_shape')
+
 
 
 class Index extends Spine.Controller
@@ -17,9 +20,8 @@ class Index extends Spine.Controller
   constructor: ->
     super
     @active @render
-    Drawing.bind("fetch",@render) 
+    Drawing.bind("fetch",@render)
 
-  
   render: =>
     context =
       drawings: Drawing.all()

@@ -18,6 +18,8 @@ class Toolbox extends Spine.Controller
       select: new SelectTool(commander: @commander, drawing: @item)
       link:   new LinkTool(commander: @commander, drawing: @item)
     @switchTo("select")
+    NodeShape.bind("change", @render)
+    LinkShape.bind("change", @render)
     
   render: =>
     @html require('views/drawings/toolbox')(@item) if @item

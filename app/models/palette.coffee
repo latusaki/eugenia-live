@@ -9,7 +9,7 @@ class Palette extends Spine.Model
   constructor: ->
     super
     @bind("destroy", @destroyChildren)
-    
+
   destroyChildren: ->
     ns.destroy() for ns in @nodeShapes().all()
     ls.destroy() for ls in @linkShapes().all()

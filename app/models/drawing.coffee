@@ -40,8 +40,7 @@ class Drawing extends Spine.Model
   updateCanvas: ->
     if paper.project
       paper.project.activeLayer.selected = false
-      for element in @selection
-        if element.select?
+      for element in @selection?
           element.select(paper.project.activeLayer)
     
 
