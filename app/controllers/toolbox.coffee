@@ -13,13 +13,24 @@ class Toolbox extends Spine.Controller
   constructor: ->
     super
     @render()
+    NodeShape.bind("change", @render)
+    LinkShape.bind("change", @render)
+    @createTools()
+    @switchTo("select")
+    
+  createTools: ->
+    # Remove any existing tools. This is a workaround
+    # for when the user performs a refresh (F5) when on
+    # the drawing page. It seems the Spine (possibly Substack)
+    # redirects back to the drawings index, and then when 
+    # the user next selects a drawing, another set of 
+    # tools will be created
+    paper.tools = []
+    
     @tools =
       node:   new NodeTool(commander: @commander, drawing: @item)
       select: new SelectTool(commander: @commander, drawing: @item)
       link:   new LinkTool(commander: @commander, drawing: @item)
-    @switchTo("select")
-    NodeShape.bind("change", @render)
-    LinkShape.bind("change", @render)
     
   render: =>
     @html require('views/drawings/toolbox')(@item) if @item

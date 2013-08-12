@@ -7,17 +7,17 @@ class LinkTool extends Tool
   drafting: false
   timer:0
   
-  onMouseMove: (event) ->
+  onMouseMove: (event) =>
     # if @parameters.shape
     #   @clearSelection()
     #   @select(@hitTester.nodeAt(event.point))
   
-  onMouseDown: (event) ->
+  onMouseDown: (event) =>
     if @parameters.shape and @hitTester.nodeAt(event.point)
       @drafting = true
       @draftLink = new DraftLink(event.point)
 
-  onMouseDrag: (event) ->
+  onMouseDrag: (event) =>
     current = new Date().getTime()
     if(current - @timer > 90)
       @timer = current
@@ -25,7 +25,7 @@ class LinkTool extends Tool
         @draftLink.extendTo(event.point)
         @changeSelectionTo(@hitTester.nodeAt(event.point)) if @hitTester.nodeAt(event.point)
   
-  onMouseUp: (event) ->
+  onMouseUp: (event) =>
     if @drafting 
       if @hitTester.nodeAt(event.point)
         path = @draftLink.finalise()

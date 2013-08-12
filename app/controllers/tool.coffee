@@ -2,14 +2,24 @@ Node = require('models/node')
 Link = require('models/link')
 DeleteElement = require('models/commands/delete_element')
 
-class Tool extends paper.Tool
+class Tool
   
   constructor: (options) ->
-    super
     @commander = options.commander
     @hitTester = options.hitTester
     @hitTester or= new PaperHitTester
     @drawing = options.drawing
+    
+    @_tool = new paper.Tool
+    @_tool.onMouseMove = @onMouseMove
+    @_tool.onMouseDrag = @onMouseDrag
+    @_tool.onMouseDown = @onMouseDown
+    @_tool.onMouseUp = @onMouseUp
+    @_tool.onKeyDown = @onKeyDown
+    @_tool.onKeyUp = @onKeyUp
+  
+  activate: =>
+    @_tool.activate()
   
   setParameter: (parameterKey, parameterValue) ->
     @parameters or= {}
@@ -18,7 +28,7 @@ class Tool extends paper.Tool
   run: (command, options={undoable: true}) ->
     @commander.run(command, options)
 
-  onKeyDown: (event) ->
+  onKeyDown: (event) =>
     # don't intercept key events if any DOM element
     # (e.g. form field) has focus
     if (document.activeElement is document.body)      

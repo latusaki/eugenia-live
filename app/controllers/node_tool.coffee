@@ -5,13 +5,13 @@ class NodeTool extends Tool
   parameters: {'shape' : null}
   timer:0
   
-  onMouseDown: (event) ->
+  onMouseDown: (event) =>
     if @parameters.shape
       @parameters.position = event.point
       @run(new CreateNode(@drawing, @parameters))
       @clearSelection()
       
-  onMouseMove: (event) ->
+onMouseMove: (event) =>
 
     # if @parameters.shape
     #   @clearSelection()
