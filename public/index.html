@@ -20,6 +20,8 @@
       $(function(){
         $('.popover-test').popover();
       });
+      // This line is essential for Google Picker to work. Normally it should be part of rtc.js but
+      // for some reason it stopped Eugenia from loading.
       google.load('picker', '1'); 
     </script>
   </head>
